@@ -1,0 +1,37 @@
+{
+  "name": "electron-webpack-template",
+  "version": "1.0.0",
+  "description": "electron-webpack",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run serve\" \"npm run electron\"",
+    "buildw": "cross-env webpack --mode production",
+    "build": "cross-env npm run buildw && electron ./electron/main.js",
+    "electron": "cross-env NODE_ENV=development electron ./electron/main.js",
+    "serve": "cross-env  webpack-dev-server --mode development --port 8088 "
+  },
+  "keywords": [
+    "webpack"
+  ],
+  "repository": "",
+  "author": "channg",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jquery": "^3.3.0",
+    "css-loader": "^0.28.10",
+    "less": "^3.0.1",
+    "less-loader": "^4.0.6",
+    "style-loader": "^0.20.2",
+    "ts-loader": "^4.0.1",
+    "typescript": "^2.7.2",
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.4",
+    "webpack-dev-server": "^3.1.0"
+  },
+  "dependencies": {
+    "concurrently": "^3.5.1",
+    "cross-env": "^5.1.4",
+    "electron": "^1.8.4",
+    "jquery": "^3.3.1"
+  }
+}
