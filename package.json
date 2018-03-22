@@ -2,13 +2,14 @@
   "name": "electron-webpack-template",
   "version": "1.0.0",
   "description": "electron-webpack",
-  "main": "index.js",
+  "main": "elec/main.js",
   "scripts": {
     "dev": "concurrently \"npm run serve\" \"npm run electron\"",
-    "buildw": "cross-env webpack --mode production",
-    "build": "cross-env npm run buildw && electron ./electron/main.js",
-    "electron": "cross-env NODE_ENV=development electron ./electron/main.js",
-    "serve": "cross-env  webpack-dev-server --mode development --port 8088 "
+    "buildw": "cross-env NODE_ENV=production webpack --mode production",
+    "build": "cross-env npm run buildw && electron ./elec/main.js",
+    "electron": "cross-env NODE_ENV=development electron ./elec/main.js",
+    "serve": "cross-env  webpack-dev-server --mode development --port 8088 ",
+    "package": "cross-env NODE_ENV=production && electron-packager ./ dasaobi --platform=win32 --arch=x64 --win32metadata.FileDescription='' --overwrite --ignore=node_modules/*  --ignore=.git --ignore=out --no-prune --electron-version=1.7.9 --out=out --icon=res/favicon.ico --asar"
   },
   "keywords": [
     "webpack"
@@ -29,9 +30,15 @@
     "webpack-dev-server": "^3.1.0"
   },
   "dependencies": {
+    "art-template": "^4.12.2",
+    "art-template-loader": "^1.4.3",
     "concurrently": "^3.5.1",
     "cross-env": "^5.1.4",
     "electron": "^1.8.4",
-    "jquery": "^3.3.1"
+    "electron-packager": "^11.1.0",
+    "file-loader": "^1.1.11",
+    "g-upload-image": "^1.0.11",
+    "jquery": "^3.3.1",
+    "url-loader": "^1.0.1"
   }
 }

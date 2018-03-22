@@ -1,6 +1,7 @@
 const webpack = require("webpack");
-
+var path = require('path');
 module.exports = {
+  target: 'electron-renderer',
   entry: {
     app: "./src/index",
     vendor: ['jquery']
@@ -17,22 +18,40 @@ module.exports = {
         loader: "less-loader" // compiles Less to CSS
       }]
     },{
+      test: /\.art$/,
+      use: [
+        {
+          loader: "art-template-loader"
+        }
+      ],
+    },{
       test: /\.tsx?$/,
       use: 'ts-loader',
       exclude: /node_modules/
+    },
+      {
+        test: /\.(png|jpg)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          }
+        ]
       }
     ]
   },
   optimization: {
-       splitChunks: {
-         name: 'jquery'
-       }
-   },
+    splitChunks: {
+      name: 'jquery'
+    }
+  },
   resolve: {
     extensions: [ '.tsx', '.ts', '.js' ]
   },
   output: {
-      publicPath:"/dist/",
-     filename: "[name].js",
+    publicPath: process.env.NODE_ENV === 'production' ? './dist/' : '/dist/',
+    filename: "[name].js"
   }
 };
